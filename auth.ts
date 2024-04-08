@@ -44,6 +44,18 @@ export const {
             token.role = existingUser.role
 
             return token
+        },
+        async signIn({user, account}) {
+            if (account?.provider !== 'credentials') {
+                return true
+            }
+
+            // @ts-ignore
+            const existingUser = await getUserById(user.id)
+
+            if (!existingUser?.emailVerified) return false
+
+            return true
         }
     },
     adapter: PrismaAdapter(db),

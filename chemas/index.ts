@@ -9,6 +9,18 @@ export const LoginSchema = object({
     })
 })
 
+export const ResetSchema = object({
+    email: z.string().email({
+        message: "Введите адрес электронной почты"
+    }),
+})
+
+export const NewPasswordSchema = object({
+    password: z.string().min(6, {
+        message: "Пароль должен содержать не менее 6 символов"
+    }),
+})
+
 export const RegisterSchema = object({
     email: z.string().email({
         message: "Введите адрес электронной почты"
